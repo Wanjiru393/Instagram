@@ -1,0 +1,68 @@
+{% extends 'insta_clone/base.html' %}
+
+{% block content %}
+
+{% include 'insta_clone/navbar.html' %}
+<div class="container" style="margin-top:7%;">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div class=""
+                    style="background-image:url('{{ image.image.url }}');background-size: contain; background-repeat:no-repeat">
+                    <img src="{{image.image.url}}" style="visibility: hidden;" class="" width="100%" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <img src="{{image.owner.profile_photo.url}}" class="rounded-circle border ml-3 mt-2"
+                                alt="{{image.image_name}}" width="35" height="35">
+                        </div>
+                        <div class="col-md-11 mt-3">
+                            <strong class="pt-"><small>{{ image.owner |lower}}</small></strong>
+                        </div>
+                    </div>
+
+                    <hr style="width:96%">
+                    {% for comment in image.comments.all %}
+                    <div class="comment ">
+                        <div class="ml-2">
+                            <strong>{{ comment.owner | lower}}</strong>
+                            <span class="">{{ comment.comment |capfirst}}</span>
+                            <p>
+                                <small><span class="text-muted">{{ comment.created | timesince }}</span></small>
+                            </p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="ml-3">Be the first to comment</p>
+                    {% endfor %}
+
+                    <hr style="width:96%;">
+                    <div id="">
+                        
+                        <div class="">
+                            <h6 class="mt-3">{{image.likes}} likes</h6>
+                        </div>
+
+                        <form action="" method="POST">
+                            {%csrf_token%}
+                            <div class="row">
+                                <div class="col-md-8 pt-1">
+                                    <textarea type="submit" name="comment" id="" cols="30" rows="10"
+                                        placeholder="leave a comment"></textarea>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class='btn blue ' type="submit" value="Post">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

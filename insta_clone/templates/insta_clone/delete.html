@@ -1,0 +1,14 @@
+{% extends 'insta_clone/base.html' %}
+
+{% block content %}
+<div class="container pt-5 text-center fs-3">
+    <div class=" p-5 h-50 card border border0-rounded">
+        <form action="" method="POST">
+            {%csrf_token%}
+            <p>Are you sure you want to delete image <strong>{{obj}}</strong>? </p>
+            <a class="text-success fs-3 text-decoration-none" href="{{request.META.HTTP_REFERER}}">No</a>
+            <input type="submit" class="btn text-danger fs-3" value="Yes">
+        </form>
+    </div> 
+</div>
+{%endblock%}
