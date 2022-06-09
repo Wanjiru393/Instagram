@@ -45,6 +45,7 @@ def register(request):
    context = {
       'form': register_form,
    }
+   
 
    return render(request, 'insta_clone/register.html', context)
 
