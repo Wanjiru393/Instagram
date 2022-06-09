@@ -19,7 +19,7 @@ class AddImageForm(ModelForm):
     class Meta:
         model = Image
         fields = ['image','image_name','image_caption']
-        widget = {
+        widgets = {
             'image': forms.FileInput(attrs={'class': 'form-control mb-3'}),
             'image_name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
             'image_caption': forms.Textarea(attrs={'class': 'form-control mb-3'}),
@@ -30,6 +30,17 @@ class UpdateImageForm(ModelForm):
     class Meta:
         model= Image
         fields= ['image_caption']
-        widget = {
+        widgets = {
             'image_caption': forms.Textarea(attrs={'class': 'form-control mb-3'}),
+        }
+
+class UpdateProfileForm(ModelForm):
+    
+    class Meta:
+        model = Profile
+        fields = ['prof_pic','bio','username']
+        widgets = {
+            'prof_pic':forms.FileInput(attrs={'class': 'form-control mb-3'}),
+            'bio':forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'username':forms.TextInput(attrs={'class': 'form-control mb-3'}),
         }
