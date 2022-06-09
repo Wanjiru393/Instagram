@@ -37,15 +37,19 @@ def register(request):
       if form.is_valid():
          user = form.save(commit=False)
          user.save()
-         profile = Profile.objects.create(username=username , owner=user)
+         profile = Profile.objects.create(name=username , owner=user)
          profile.save()
          print(profile)
-         
+
       return redirect('login')
    context = {
       'form': register_form,
    }
 
    return render(request, 'insta_clone/register.html', context)
+
+
+def logout(request):
+   return redirect('login')
 
       
