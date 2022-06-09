@@ -43,5 +43,32 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
-    
-    
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_like')
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='post_like')
+
+    def user_liked_post(self, instance,*args,**kwargs):
+        like = instance
+        post = like.Post
+        sender = like.User
+
+    def user_unlike_post(self, instance,*args,**kwargs):
+        like = instance
+        post = like.Post
+        sender = like.User
+
+class Follow(models.Model):
+    follower = models.ForeignKey(User, on_delete=models.CASCADE ,related_name='follower')
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
+
+    def user_follow(sender, instance,*args,**kwargs):
+        follow = instance
+        sender = follow.follower
+        following = follow.following
+
+    def user_unfollow(sender, instance,*args,**kwargs):
+        follow = instance
+        sender = follow.follower
+        following = follow.following
+        
