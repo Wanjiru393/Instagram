@@ -4,6 +4,37 @@
 
 {% block content %}
 
-    <h1>Instagram Clone</h1>
+    <div class="container mt-5">
+        <form>
+            {% csrf_token %}
+
+            {% if messages %}
+                <p>{% for message in messages %} </p>
+                <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <h3>Login</h3>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Username</label>
+                <input type="username" name="username" class="form-control" id="username" placeholder="name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="name">
+            </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-md-6">
+                    <input type="submit" value="Login" class="btn btn-login">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="pt-2 p-5">
+        <p class="form-control ps-5 pt-3 pb-3 pe-5">
+            Dont have an account?  <a href="#" class="text-decoration-none">Signup</a>
+        </p>
+    </div>
+
+    {% comment %} <h1>Instagram Clone</h1> {% endcomment %}
 
 {% endblock content %}
