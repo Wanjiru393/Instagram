@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model):
     username = models.CharField(max_length=40,blank=True)
     bio = models.TextField(max_length=300)
     prof_pic = models.ImageField(upload_to="profile/")
+    owner = models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile',)
 
 class Image(models.Model):
     image = models.ImageField(upload_to="image/",height_field=none,width_field=None,max_length=100)
@@ -12,7 +14,6 @@ class Image(models.Model):
     image_caption = models.TextField(max_length=500, blank=True)
     likes = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    comments = models.TextField()
     owner = models.ForeignKey(profile, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -31,6 +32,16 @@ class Image(models.Model):
     
     def count_likes(self):
         return self.likes.count()
-
     class Meta:
         ordering =['-date_created']
+
+class Comment(models.Model):
+    comment = models.TextField()
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comment')
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comment')
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.comment
+    
+    
