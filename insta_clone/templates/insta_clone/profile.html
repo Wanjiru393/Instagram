@@ -1,0 +1,57 @@
+{% extends 'insta_clone/base.html' %}
+
+{% block content %}
+{% include 'insta_clone/navbar.html' %}
+<div class="container ">
+    <div class="row mt-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="{{profile.profile_photo.url}}" class="main-profile rounded-circle" alt="Image">
+                        </div>
+                        <div class="col-md-6 mt-5">
+                            <div class="row">
+                                <h2 class="col-md-4">{{profile.name}}</h2>
+                                <div class="col-md-4"></div>
+                                <button type="button" class="col-md-4 btn btn-outline-dark">
+                                   <a href="{%url 'update-profile' profile.id%}" class="text-decoration-none">Edit</a> 
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mt-3 mb-3">
+                                    {{profile.bio}}
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 row">
+                                    <p class="col-md-6">{{ following_count }} Following </p>
+                                    <p class="col-md-6 ">{{ followers_count }} Followers</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <hr>
+           <p>Posts: </p>
+           {% for image in images %}
+            <div class="row">
+                <div class="col-md-4">
+                        <img src="{{image.image.url}}" class=" img-fluid me-3 mb-3" alt="Image">
+                </div>
+            </div>
+           
+           {% endfor %}
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{%endblock%}
