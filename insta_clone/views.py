@@ -4,4 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 def login(request):
 
-    return HttpResponse('<h1>Hello!</h1>')
+   return render(request, 'insta_clone/login.html')
