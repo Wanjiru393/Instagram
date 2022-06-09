@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as authlogin
+from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm, AddImageForm, UpdateImageForm,UpdateProfileForm
 from insta_clone.models import Image,Profile,Follow,Likes,Comment
@@ -45,7 +46,7 @@ def register(request):
    context = {
       'form': register_form,
    }
-   
+
 
    return render(request, 'insta_clone/register.html', context)
 
@@ -53,4 +54,17 @@ def register(request):
 def logout(request):
    return redirect('login')
 
-      
+@login_required()
+def home(request):
+   images = Image.objects.all()
+   profile = request.user
+   profile_info = Profile.objects.get(owner=profile)
+   profiles = Profile.objects.all()
+
+   context = {
+      'images': images,
+      'profile_info': profile_info,
+      'profiles': profiles,
+   }
+
+   return render(request, 'insta_clone/index.html', context)
