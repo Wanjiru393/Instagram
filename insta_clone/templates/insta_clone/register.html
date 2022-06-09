@@ -1,0 +1,30 @@
+{% extends 'insta_clone/base.html' %}
+
+
+
+{% block content %}
+
+    <div class="container mt-5">
+        <form method="post" class="form-control">
+            {% csrf_token %}
+
+            {% if messages %}
+                <p>{% for message in messages %} </p>
+                <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <h3>Register</h3>
+            {{ form.errors.as_p }}
+            {{ form }}
+         <input type="submit" value="Register" class="btn btn-register">
+         <p class="form-control ps-5 pt-3 pb-3 pe-5">
+            Already have an account?  <a href="{% url 'login' %}" class="text-decoration-none">Login</a>
+        </p>
+        </form>
+       
+    </div>
+    
+
+    {% comment %} <h1>Instagram Clone</h1> {% endcomment %}
+
+{% endblock content %}
