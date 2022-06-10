@@ -95,7 +95,7 @@ header{
     color: black;
 }
 .profile-img{
-    /* display:inline-block; */
+    display:inline-block;
     /* background-color:turquoise; */
     height: 30px;
     width: 30px;
